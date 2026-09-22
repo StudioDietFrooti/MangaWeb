@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-manga-title {
+    font-family: 'Bebas Neue', 'Space Grotesk', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .font-japanese {
+    font-family: 'Shippori Mincho', 'Noto Sans JP', serif;
+  }
+  .font-sans-body {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Manga screentone dot pattern */
+  .screentone-dots {
+    background-image: radial-gradient(rgba(150, 150, 150, 0.18) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  .screentone-dots-fine {
+    background-image: radial-gradient(rgba(120, 120, 120, 0.22) 0.8px, transparent 0.8px);
+    background-size: 5px 5px;
+  }
+
+  .screentone-dots-light {
+    background-image: radial-gradient(rgba(20, 20, 20, 0.12) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  /* Manga panel double borders and ink strokes */
+  .manga-panel-border {
+    border: 2px solid currentColor;
+    box-shadow: 4px 4px 0px 0px currentColor;
+  }
+
+  .manga-panel-border-sm {
+    border: 1.5px solid currentColor;
+    box-shadow: 2.5px 2.5px 0px 0px currentColor;
+  }
+
+  .manga-speedline-top {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 18px,
+      rgba(150, 150, 150, 0.06) 18px,
+      rgba(150, 150, 150, 0.06) 20px
+    );
+  }
+}
+
+/* Custom minimal monochrome scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 160, 0.6);
+}
