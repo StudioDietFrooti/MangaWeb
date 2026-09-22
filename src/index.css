@@ -65,3 +65,402 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(160, 160, 160, 0.6);
 }
+
+/* ==========================================================================
+   Interactive Ability Card Animations (Tiger, Light, Portal, Gas, Art)
+   ========================================================================== */
+
+/* Tiger: 3 Rapid Orange Diagonal Claw Slashes */
+@keyframes tigerSlash1 {
+  0% { stroke-dashoffset: 320; opacity: 0; }
+  12% { stroke-dashoffset: 0; opacity: 1; }
+  65% { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes tigerSlash2 {
+  0%, 10% { stroke-dashoffset: 320; opacity: 0; }
+  22% { stroke-dashoffset: 0; opacity: 1; }
+  70% { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes tigerSlash3 {
+  0%, 20% { stroke-dashoffset: 320; opacity: 0; }
+  32% { stroke-dashoffset: 0; opacity: 1; }
+  75% { opacity: 0.9; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes clawSparks {
+  0% { transform: scale(0.3) translate(0, 0); opacity: 0; }
+  25% { transform: scale(1.2) translate(8px, 6px); opacity: 1; }
+  70% { transform: scale(1.4) translate(18px, 14px); opacity: 0.7; }
+  100% { transform: scale(1.5) translate(24px, 20px); opacity: 0; }
+}
+
+/* Light: Yellow Asteroid Flying Across at Full Speed from Corner to Corner */
+@keyframes yellowAsteroidFlyAcross {
+  0% {
+    transform: translate(-70px, -40px) rotate(32deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(250px, 140px) rotate(32deg);
+    opacity: 0;
+  }
+}
+
+@keyframes asteroidSparksTrail {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+/* Portal: Swirling Mysterious Vortex Opening in Center & Closing Back */
+@keyframes portalVortexOpenClose {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  22% { transform: scale(1.18) rotate(220deg); opacity: 1; }
+  48% { transform: scale(1.05) rotate(540deg); opacity: 0.95; }
+  70% { transform: scale(0.92) rotate(840deg); opacity: 0.85; }
+  92% { transform: scale(0.1) rotate(1140deg); opacity: 0.4; }
+  100% { transform: scale(0) rotate(1260deg); opacity: 0; }
+}
+
+@keyframes portalSparksOrbit {
+  0% { transform: rotate(0deg) scale(0.5); opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 0.8; }
+  100% { transform: rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* Gas: Giant Gas Genie Forming from Swirling Vapor, Slashing Sword, and Dissipating */
+@keyframes genieFormRise {
+  0% {
+    transform: translateY(30px) scale(0.4);
+    opacity: 0;
+    filter: blur(6px);
+  }
+  24% {
+    transform: translateY(4px) scale(0.95);
+    opacity: 0.95;
+    filter: blur(0px);
+  }
+  46% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  64% {
+    transform: translateY(-2px) scale(1.02);
+    opacity: 0.95;
+  }
+  78% {
+    transform: translateY(-5px) scale(1.08);
+    opacity: 0.7;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-12px) scale(1.18);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+@keyframes genieSwordSlash {
+  0%, 25% {
+    transform: rotate(-35deg) translate(-10px, 8px) scale(0.9);
+    transform-origin: 20% 70%;
+    opacity: 0.85;
+  }
+  42% {
+    transform: rotate(-55deg) translate(-14px, 4px) scale(0.95);
+    transform-origin: 20% 70%;
+    opacity: 1;
+  }
+  58% {
+    transform: rotate(50deg) translate(22px, -8px) scale(1.12);
+    transform-origin: 20% 70%;
+    opacity: 1;
+  }
+  75% {
+    transform: rotate(62deg) translate(26px, -10px) scale(1.15);
+    transform-origin: 20% 70%;
+    opacity: 0.75;
+  }
+  100% {
+    transform: rotate(68deg) translate(30px, -12px) scale(1.2);
+    transform-origin: 20% 70%;
+    opacity: 0;
+  }
+}
+
+@keyframes genieSlashCrescent {
+  0%, 46% {
+    stroke-dashoffset: 240;
+    opacity: 0;
+  }
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  74% {
+    opacity: 0.85;
+    transform: scale(1.05) translate(4px, -2px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.15) translate(12px, -6px);
+  }
+}
+
+@keyframes vaporSwirlPuff {
+  0% {
+    transform: scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1) rotate(160deg);
+    opacity: 0.85;
+  }
+  65% {
+    transform: scale(1.12) rotate(360deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.35) rotate(520deg);
+    opacity: 0;
+  }
+}
+
+/* Gas: Automatic Trait Animations for Gas Genie */
+@keyframes genieFloatHover {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes mouthFlamesFlicker {
+  0%, 100% {
+    transform: scale(1) skewX(0deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.8));
+  }
+  25% {
+    transform: scale(1.15, 1.25) skewX(-4deg) translate(2px, -3px);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.9));
+  }
+  50% {
+    transform: scale(0.95, 1.1) skewX(3deg) translate(-1px, -1px);
+    opacity: 0.85;
+    filter: drop-shadow(0 0 7px rgba(59, 130, 246, 0.8));
+  }
+  75% {
+    transform: scale(1.2, 1.35) skewX(-2deg) translate(3px, -4px);
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.95));
+  }
+}
+
+@keyframes mouthFlamesSecondary {
+  0%, 100% {
+    transform: scale(0.9) translate(0, 0);
+    opacity: 0.75;
+  }
+  35% {
+    transform: scale(1.2) translate(4px, -5px) rotate(5deg);
+    opacity: 0.95;
+  }
+  70% {
+    transform: scale(1.05) translate(-2px, -2px) rotate(-3deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes genieTraitSwordSwingLoop {
+  0%, 28% {
+    /* Ready stance holding glowing sword */
+    transform: rotate(-15deg) translate(0px, 0px);
+    transform-origin: 22% 72%;
+  }
+  36% {
+    /* Windup: pulls sword back */
+    transform: rotate(-45deg) translate(-6px, -4px);
+    transform-origin: 22% 72%;
+  }
+  46% {
+    /* Swift powerful diagonal slash across */
+    transform: rotate(55deg) translate(14px, 4px);
+    transform-origin: 22% 72%;
+  }
+  58% {
+    /* Follow-through flourish */
+    transform: rotate(45deg) translate(10px, 2px);
+    transform-origin: 22% 72%;
+  }
+  75%, 100% {
+    /* Return smoothly to ready stance */
+    transform: rotate(-15deg) translate(0px, 0px);
+    transform-origin: 22% 72%;
+  }
+}
+
+@keyframes slashWaveLoop {
+  0%, 42% {
+    opacity: 0;
+    transform: scale(0.6) translate(-10px, 0px);
+    stroke-dashoffset: 120;
+  }
+  47% {
+    opacity: 1;
+    transform: scale(1) translate(0px, 0px);
+    stroke-dashoffset: 0;
+  }
+  58% {
+    opacity: 0.85;
+    transform: scale(1.15) translate(8px, -4px);
+  }
+  68%, 100% {
+    opacity: 0;
+    transform: scale(1.3) translate(18px, -8px);
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Art: Traditional Japanese Calligraphy Brush Pen Drawing a Black Cross Mark */
+@keyframes shodoBrushCrossMotion {
+  0% {
+    transform: translate(45px, 14px) rotate(-18deg);
+    opacity: 0;
+  }
+  5% {
+    transform: translate(62px, 34px) rotate(-14deg);
+    opacity: 1;
+  }
+  16% {
+    transform: translate(96px, 62px) rotate(-8deg);
+    opacity: 1;
+  }
+  26% {
+    transform: translate(138px, 96px) rotate(-3deg);
+    opacity: 1;
+  }
+  32% {
+    transform: translate(146px, 90px) rotate(-10deg);
+    opacity: 0.95;
+  }
+  42% {
+    transform: translate(148px, 42px) rotate(-20deg);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(138px, 34px) rotate(-24deg);
+    opacity: 1;
+  }
+  58% {
+    transform: translate(102px, 63px) rotate(-18deg);
+    opacity: 1;
+  }
+  68% {
+    transform: translate(62px, 96px) rotate(-12deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(52px, 90px) rotate(-18deg);
+    opacity: 0.95;
+  }
+  84% {
+    transform: translate(38px, 68px) rotate(-28deg);
+    opacity: 0.8;
+  }
+  92% {
+    transform: translate(26px, 40px) rotate(-36deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(20px, 25px) rotate(-42deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shodoCrossStrokeOne {
+  0%, 5% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  26% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  84% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes shodoCrossStrokeTwo {
+  0%, 47% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  48% {
+    opacity: 1;
+  }
+  68% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  84% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes shodoInkSplatterReveal {
+  0%, 24% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  28% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  84% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}

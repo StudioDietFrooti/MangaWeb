@@ -13,7 +13,7 @@ import { MangaReader } from './components/MangaReader';
 import { ChapterLibrary } from './components/ChapterLibrary';
 import { OrderForm } from './components/OrderForm';
 import { AboutSection } from './components/AboutSection';
-import { WorldLoreSection } from './components/WorldLoreSection';
+import { BackgroundAudio } from './components/BackgroundAudio';
 import { Footer } from './components/Footer';
 
 export default function App() {
@@ -135,12 +135,6 @@ export default function App() {
               isDarkMode={isDarkMode}
             />
 
-            {/* Ancient World Lore: Civilizations, Forbidden Sword Fusion, Secret Blades & Dragon */}
-            <WorldLoreSection
-              isDarkMode={isDarkMode}
-              onReadClick={() => handleSelectChapterAndRead('ch-1')}
-            />
-
             {/* Quick Featured Chapter 01 Section on Homepage */}
             <section className="py-12 px-4 sm:px-6 max-w-6xl mx-auto">
               <div className="border-b-2 border-current pb-4 mb-6 flex items-center justify-between">
@@ -231,6 +225,12 @@ export default function App() {
           isDarkMode={isDarkMode}
         />
       )}
+
+      {/* Persistent Unobtrusive Background Audio Player */}
+      <BackgroundAudio
+        isDarkMode={isDarkMode}
+        isReaderModeActive={currentTab === 'read'}
+      />
     </div>
   );
 }

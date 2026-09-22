@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { MANGA_INFO, AWAKENED_POWERS } from '../data/mangaData';
 import { MangaCover } from './MangaCover';
+import { AbilityEffectOverlay, AbilityEffectType } from './AbilityEffectOverlay';
+import { GasGenieFigure } from './GasGenieFigure';
 import {
   BookOpen,
   ShoppingBag,
@@ -13,10 +15,8 @@ import {
   Wind,
   Palette,
   Sparkles,
-  Swords,
-  Lock,
-  Eye,
-  Scroll,
+  Zap,
+  ListOrdered,
 } from 'lucide-react';
 import { ViewTab } from '../types';
 
@@ -34,30 +34,69 @@ export const Hero: React.FC<HeroProps> = ({
   isDarkMode,
 }) => {
   const [selectedPowerId, setSelectedPowerId] = useState<string>('tiger');
+  const [activeEffect, setActiveEffect] = useState<{
+    powerId: AbilityEffectType;
+    triggerKey: number;
+  } | null>({
+    powerId: 'tiger',
+    triggerKey: Date.now(),
+  });
+
   const activePower =
     AWAKENED_POWERS.find((p) => p.id === selectedPowerId) || AWAKENED_POWERS[0];
 
-  const getPowerIcon = (id: string) => {
-    switch (id) {
-      case 'tiger':
-        return <Flame className="w-4 h-4 text-neutral-400 group-hover:text-white" />;
-      case 'light':
-        return <Sun className="w-4 h-4 text-neutral-400 group-hover:text-white" />;
-      case 'portal':
-        return <DoorOpen className="w-4 h-4 text-neutral-400 group-hover:text-white" />;
-      case 'gas':
-        return <Wind className="w-4 h-4 text-neutral-400 group-hover:text-white" />;
-      case 'art':
-        return <Palette className="w-4 h-4 text-neutral-400 group-hover:text-white" />;
-      default:
-        return <Sparkles className="w-4 h-4" />;
-    }
+  const handlePowerCardClick = (id: string) => {
+    setSelectedPowerId(id);
+    setActiveEffect({
+      powerId: id as AbilityEffectType,
+      triggerKey: Date.now(),
+    });
   };
 
-  const scrollToLore = () => {
-    const el = document.getElementById('world-lore-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const getPowerIcon = (id: string, isSelected: boolean) => {
+    switch (id) {
+      case 'tiger':
+        return (
+          <Flame
+            className={`w-4 h-4 transition-colors ${
+              isSelected ? 'text-amber-500' : 'text-orange-400/80 group-hover:text-orange-400'
+            }`}
+          />
+        );
+      case 'light':
+        return (
+          <Sun
+            className={`w-4 h-4 transition-colors ${
+              isSelected ? 'text-yellow-600' : 'text-yellow-400/80 group-hover:text-yellow-300'
+            }`}
+          />
+        );
+      case 'portal':
+        return (
+          <DoorOpen
+            className={`w-4 h-4 transition-colors ${
+              isSelected ? 'text-indigo-600' : 'text-indigo-400/80 group-hover:text-cyan-400'
+            }`}
+          />
+        );
+      case 'gas':
+        return (
+          <Wind
+            className={`w-4 h-4 transition-colors ${
+              isSelected ? 'text-teal-600' : 'text-teal-300/80 group-hover:text-teal-200'
+            }`}
+          />
+        );
+      case 'art':
+        return (
+          <Palette
+            className={`w-4 h-4 transition-colors ${
+              isSelected ? 'text-neutral-900' : 'text-neutral-400 group-hover:text-white'
+            }`}
+          />
+        );
+      default:
+        return <Sparkles className="w-4 h-4" />;
     }
   };
 
@@ -117,7 +156,7 @@ export const Hero: React.FC<HeroProps> = ({
               {MANGA_INFO.title}
             </h1>
 
-            {/* Rich Manga Story Narrative with Lore, Forbidden Fusion, Secret, and Dragon Hint */}
+            {/* Manga Story Narrative */}
             <div
               className={`mt-4 space-y-3 font-sans-body max-w-xl text-sm sm:text-base leading-relaxed ${
                 isDarkMode ? 'text-neutral-300' : 'text-neutral-700'
@@ -125,108 +164,166 @@ export const Hero: React.FC<HeroProps> = ({
               id="hero-synopsis-block"
             >
               <p>
-                When an ominous portal tore open without warning across the school grounds, a small group of ordinary students stepped into the uncharted rift. Traversing the unknown threshold altered them forever—awakening extraordinary, unprecedented powers dormant within their spirits.
+                When an ominous portal tore open without warning across the school grounds, a group of ordinary students stepped into the uncharted rift. Traversing the unknown threshold altered them forever—awakening extraordinary, unprecedented powers dormant within their spirits.
               </p>
               
               <p className="text-neutral-400 dark:text-neutral-300">
                 Among them arose the ferocious primal might of the <strong className="text-neutral-100 font-bold">Tiger</strong>, the blinding velocity and radiant energy of <strong className="text-neutral-100 font-bold">Light</strong>, the dimensional tears of the <strong className="text-neutral-100 font-bold">Portal</strong>, the volatile atmospheric dispersion of <strong className="text-neutral-100 font-bold">Gas</strong>, and the miraculous ability to summon physical living reality from drawn <strong className="text-neutral-100 font-bold">Art</strong>.
               </p>
 
-              {/* The 60% Ancient Lore Context: Civilizations, Forbidden Fusion & The Secret */}
-              <div
-                className={`p-3.5 border text-xs sm:text-sm font-sans-body leading-relaxed space-y-2 ${
-                  isDarkMode
-                    ? 'border-neutral-800 bg-neutral-950/80 text-neutral-300'
-                    : 'border-neutral-300 bg-neutral-50 text-neutral-700'
-                }`}
-              >
-                <div className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-neutral-400 font-bold">
-                  <Swords className="w-3.5 h-3.5" />
-                  <span>The 60% Ancient Lore & The Shattered Blade</span>
-                </div>
-                <p>
-                  Their awakening re-ignites an ancient blood feud: catastrophic riots once tore the earth between the <em>Fruit-Eater Civilization</em> and the disciplined <em>Swordsman Civilization</em>. By an inviolable cosmic rule, <strong>if any fruit user attempts to master a sword or fuse both powers, the steel violently shatters and breaks into dust</strong>.
-                </p>
-                <div className="flex items-start gap-2 pt-1 border-t border-neutral-800/60 font-mono text-xs text-neutral-400">
-                  <Lock className="w-3.5 h-3.5 mt-0.5 shrink-0 text-neutral-300" />
-                  <span>
-                    <strong>Group Secret:</strong> Two students in the classroom are secretly destined to receive swords—hiding their blade legacy from their fruit-wielding classmates.
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-500 italic">
-                  <Eye className="w-3 h-3 text-neutral-400" />
-                  <span>...And beneath the deepest seismic crust, a slumbering dragon slowly stirs.</span>
-                </div>
-              </div>
+              <p className="text-neutral-300 dark:text-neutral-200">
+                Their awakening re-ignites dormant powers within them—thrusting ordinary students into extraordinary battles of will, instinct, and survival. As their abilities surge, each student must discover how to master their awakening and uncover the secrets waiting beyond the threshold.
+              </p>
 
               <p className="font-medium italic border-l-2 pl-3 py-0.5 border-neutral-500 text-neutral-200 dark:text-neutral-200">
-                To uncover where the portal leads, how the tension between steel and power explodes, and what happens next—click Read below to dive into Chapter 01.
+                To experience the story as it unfolds and see their powers in action, click Read below to dive directly into Chapter 01.
               </p>
             </div>
 
             {/* Interactive Awakened Powers Showcase (5 Powers: Tiger, Light, Portal, Gas, Art) */}
             <div className="mt-6 p-4 border border-neutral-800 bg-neutral-950/70 max-w-xl">
-              <div className="flex items-center justify-between mb-3 border-b border-neutral-800 pb-2">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-bold">
-                  AWAKENED STUDENT ABILITIES (能力概要)
+              <div className="flex items-center justify-between mb-2.5 border-b border-neutral-800 pb-2">
+                <div className="flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-300 font-bold">
+                    AWAKENED STUDENT ABILITIES (能力覚醒)
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-neutral-400 hidden sm:inline">
+                  Tap card to trigger effect
                 </span>
-                <button
-                  type="button"
-                  onClick={scrollToLore}
-                  className="text-[10px] font-mono text-neutral-400 underline hover:text-white"
-                >
-                  View World Lore ↓
-                </button>
               </div>
 
-              {/* Power Selector Tabs (5 Columns) */}
-              <div className="grid grid-cols-5 gap-1.5 mb-3">
+              {/* Ability Cards Grid (5 Columns: Tiger, Light, Portal, Gas, Art) */}
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-2 mb-3">
                 {AWAKENED_POWERS.map((power) => {
                   const isSelected = power.id === selectedPowerId;
+                  const isEffectActive = activeEffect?.powerId === power.id;
+
+                  // Unique styling per ability
+                  let borderClass = 'border-neutral-800 bg-neutral-900/60 text-neutral-400 hover:border-neutral-600 hover:text-white';
+                  if (isSelected) {
+                    switch (power.id) {
+                      case 'tiger':
+                        borderClass = 'border-orange-500 bg-orange-950/40 text-orange-200 shadow-[0_0_12px_rgba(249,115,22,0.35)]';
+                        break;
+                      case 'light':
+                        borderClass = 'border-yellow-400 bg-yellow-950/40 text-yellow-200 shadow-[0_0_12px_rgba(250,204,21,0.35)]';
+                        break;
+                      case 'portal':
+                        borderClass = 'border-indigo-400 bg-indigo-950/40 text-indigo-200 shadow-[0_0_12px_rgba(99,102,241,0.35)]';
+                        break;
+                      case 'gas':
+                        borderClass = 'border-teal-400 bg-teal-950/40 text-teal-200 shadow-[0_0_12px_rgba(45,212,191,0.35)]';
+                        break;
+                      case 'art':
+                        borderClass = 'border-neutral-300 bg-neutral-900 text-white shadow-[0_0_12px_rgba(255,255,255,0.25)]';
+                        break;
+                      default:
+                        borderClass = 'border-white bg-white text-black font-bold';
+                    }
+                  }
+
                   return (
                     <button
                       key={power.id}
                       type="button"
-                      onClick={() => setSelectedPowerId(power.id)}
-                      className={`p-2 border transition-all text-left flex flex-col justify-between group ${
-                        isSelected
-                          ? 'border-white bg-white text-black font-bold shadow-[2px_2px_0px_0px_rgba(255,255,255,0.3)]'
-                          : 'border-neutral-800 bg-neutral-900/60 text-neutral-400 hover:border-neutral-600 hover:text-white'
-                      }`}
-                      id={`power-tab-${power.id}`}
+                      onClick={() => handlePowerCardClick(power.id)}
+                      className={`relative overflow-hidden p-2 border transition-all text-left flex flex-col justify-between group active:scale-95 cursor-pointer select-none ${borderClass}`}
+                      id={`power-card-${power.id}`}
+                      aria-label={`Trigger ${power.name} ability effect`}
+                      title={`Click to trigger ${power.name} (${power.kanji}) effect`}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-japanese text-sm font-black">
+                      <div className="flex items-center justify-between pointer-events-none">
+                        <span className="font-japanese text-sm sm:text-base font-black">
                           {power.kanji}
                         </span>
-                        {getPowerIcon(power.id)}
+                        {getPowerIcon(power.id, isSelected)}
                       </div>
-                      <span className="text-[11px] font-mono uppercase tracking-wider block mt-1 truncate">
+                      <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider block mt-1 truncate pointer-events-none font-bold">
                         {power.name}
                       </span>
+
+                      {/* On-Card Compact Themed Animation Overlay */}
+                      {isEffectActive && (
+                        <AbilityEffectOverlay
+                          effect={power.id as AbilityEffectType}
+                          triggerKey={activeEffect.triggerKey}
+                          isCompact={true}
+                        />
+                      )}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Active Power Detail Card */}
-              <div className="p-3 border border-neutral-800 bg-neutral-900/40 text-left">
-                <div className="flex items-baseline justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-japanese text-base font-black text-white">
-                      {activePower.japanese}
-                    </span>
-                    <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 border border-neutral-700 text-neutral-300">
-                      {activePower.category}
-                    </span>
+              {/* Active Power Detail Card with Large Interactive Effect Stage */}
+              <div
+                onClick={() => handlePowerCardClick(activePower.id)}
+                className="relative overflow-hidden p-3.5 border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-900/80 transition-all text-left cursor-pointer group select-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.5)]"
+                id="active-power-detail-card"
+                title="Tap to re-trigger ability effect"
+              >
+                {/* Large Themed Animation Overlay on Stage */}
+                {activeEffect?.powerId === activePower.id && (
+                  <AbilityEffectOverlay
+                    effect={activePower.id as AbilityEffectType}
+                    triggerKey={activeEffect.triggerKey}
+                    isCompact={false}
+                  />
+                )}
+
+                <div className="relative z-10">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-japanese text-base sm:text-lg font-black text-white">
+                        {activePower.japanese}
+                      </span>
+                      <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 border border-neutral-700 text-neutral-300 bg-neutral-950/80 font-bold">
+                        {activePower.category}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-mono text-neutral-400 group-hover:text-amber-300 transition-colors flex items-center gap-1">
+                        <Zap className="w-3 h-3" />
+                        <span>Tap to trigger</span>
+                      </span>
+                      <span className="text-[10px] font-mono text-neutral-500 hidden sm:inline">
+                        • {activePower.colorTone}
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-[10px] font-mono text-neutral-500">
-                    {activePower.colorTone}
-                  </span>
+                  <p className="text-xs font-sans-body text-neutral-300 mt-1.5 leading-relaxed">
+                    {activePower.description}
+                  </p>
+
+                  {/* Small-Medium Gas Genie Figure with Cool Blue, Violet & Cyan Mouth Flames Automatically Swinging Sword */}
+                  {activePower.id === 'gas' && (
+                    <div className="mt-3 pt-3 border-t border-cyan-900/60 flex flex-col sm:flex-row items-center gap-4 bg-neutral-950/80 p-3 border border-cyan-500/40 rounded">
+                      {/* Small/Medium Animated Genie Figure */}
+                      <div className="shrink-0 flex items-center justify-center p-1 bg-neutral-900/60 rounded-full border border-cyan-500/30">
+                        <GasGenieFigure size="md" autoSwing={true} />
+                      </div>
+
+                      <div className="flex-1 min-w-0 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 border border-cyan-400/80 bg-cyan-950 text-cyan-300 font-bold tracking-wider">
+                            AUTOMATIC TRAIT // 気の巨神
+                          </span>
+                          <span className="text-[10px] font-japanese text-violet-400 font-bold">
+                            蒼炎紫電・自動抜刀
+                          </span>
+                        </div>
+                        <h4 className="text-xs font-mono font-bold text-white uppercase mt-1">
+                          Vapor Djinn with Cyan, Blue & Violet Mouth Flames
+                        </h4>
+                        <p className="text-[11px] font-sans-body text-neutral-300 mt-1 leading-relaxed">
+                          Continuously exhales cool blue, violet, and cyan atmospheric flames while automatically executing swift energy sword slashes like an inherent combat trait.
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <p className="text-xs font-sans-body text-neutral-300 mt-1.5 leading-relaxed">
-                  {activePower.description}
-                </p>
               </div>
             </div>
 
@@ -263,16 +360,16 @@ export const Hero: React.FC<HeroProps> = ({
 
               <button
                 type="button"
-                onClick={scrollToLore}
+                onClick={() => onNavigate('chapters')}
                 className={`px-6 py-4 text-sm sm:text-base font-mono uppercase tracking-widest font-bold transition-all flex items-center justify-center gap-2.5 border-2 ${
                   isDarkMode
                     ? 'border-neutral-700 bg-neutral-900/90 text-white hover:border-neutral-500 hover:bg-neutral-800'
                     : 'border-neutral-400 bg-white text-black hover:border-neutral-700 hover:bg-neutral-50'
                 }`}
-                id="hero-btn-explore-lore"
+                id="hero-btn-explore-chapters"
               >
-                <Scroll className="w-4 h-4" />
-                <span>EXPLORE LORE</span>
+                <ListOrdered className="w-4 h-4" />
+                <span>CHAPTER ARCHIVE</span>
               </button>
             </div>
 
