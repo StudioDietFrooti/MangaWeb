@@ -13,6 +13,7 @@ import { MangaReader } from './components/MangaReader';
 import { ChapterLibrary } from './components/ChapterLibrary';
 import { OrderForm } from './components/OrderForm';
 import { AboutSection } from './components/AboutSection';
+import { WorldLoreSection } from './components/WorldLoreSection';
 import { Footer } from './components/Footer';
 
 export default function App() {
@@ -132,6 +133,12 @@ export default function App() {
               customCover={customCover}
               onCoverChange={handleCoverChange}
               isDarkMode={isDarkMode}
+            />
+
+            {/* Ancient World Lore: Civilizations, Forbidden Sword Fusion, Secret Blades & Dragon */}
+            <WorldLoreSection
+              isDarkMode={isDarkMode}
+              onReadClick={() => handleSelectChapterAndRead('ch-1')}
             />
 
             {/* Quick Featured Chapter 01 Section on Homepage */}

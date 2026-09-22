@@ -6,11 +6,159 @@ export const MANGA_INFO = {
   japaneseRomaji: 'Chikara no Tankyū',
   tagline: 'Exploration / Quest for Power',
   synopsis:
-    'An original school manga chronicling the sudden awakening of mysterious powers among students. As hidden abilities manifest within classroom corridors and courtyards, students must navigate the burden, conflicts, and discovery of what true strength means.',
+    'When an enigmatic portal materialized without warning in the school grounds, a group of ordinary students stepped into the uncharted rift. Traversing the threshold awakened strange and unique powers within them: the feral ferocity of the Tiger, the blinding velocity of Light, the spatial tears of the Portal, the volatile atmospheric grasp of Gas, and the miraculous ability to summon living reality from drawn Art. But behind their awakening lies an ancient history—a catastrophic world shaped by bitter historical riots between the Fruit-Awakened Civilization and the Blade Masters of the Swordsman Civilization. By an inviolable law of their world, any fruit user who tries to master a blade or blend the two forces watches the steel violently shatter and break. And deep within the student group, a dangerous secret is kept: two among them are destined to receive swords. In the shadows of both ancient civilizations, faint whispers murmur of an ancient slumbering dragon waiting beneath the crust. To uncover what happens next and witness the collision of steel and power, click Read below and start Chapter 01.',
   projectStatus: 'Original Student Project',
   disclaimer: 'An original student-made manga project. All content created for school publication.',
   authorPlaceholder: '[Student Creator / Artist Name]',
   schoolPlaceholder: '[School / Manga Club / Grade / Section]',
+};
+
+export interface AwakenedPower {
+  id: string;
+  name: string;
+  japanese: string;
+  kanji: string;
+  category: string;
+  tagline: string;
+  description: string;
+  colorTone: string;
+}
+
+export const AWAKENED_POWERS: AwakenedPower[] = [
+  {
+    id: 'tiger',
+    name: 'Tiger',
+    japanese: '虎の力 (Tora no Chikara)',
+    kanji: '虎',
+    category: 'Beast / Primal',
+    tagline: 'Apex Predator Ferocity & Feral Senses',
+    description:
+      'Unleashes untamed physical ferocity, hyper-reactive predator reflexes, and explosive kinetic claw strikes that crush barriers.',
+    colorTone: 'Feral Might',
+  },
+  {
+    id: 'light',
+    name: 'Light',
+    japanese: '光の力 (Hikari no Chikara)',
+    kanji: '光',
+    category: 'Radiance / Energy',
+    tagline: 'Blinding Velocity & Luminescent Piercing Rays',
+    description:
+      'Manipulates ambient photons to accelerate to blinding speeds, create radiant flash shields, and loose piercing beam strikes.',
+    colorTone: 'Absolute Radiance',
+  },
+  {
+    id: 'portal',
+    name: 'Portal',
+    japanese: '門の力 (Mon no Chikara)',
+    kanji: '門',
+    category: 'Spatial / Rift',
+    tagline: 'Dimensional Tear & Spatial Relocation',
+    description:
+      'Folds local space to open instant transit doorways, bend projectile trajectories, and banish attacks across rift thresholds.',
+    colorTone: 'Dimensional Void',
+  },
+  {
+    id: 'gas',
+    name: 'Gas',
+    japanese: '気の力 (Ki no Chikara)',
+    kanji: '気',
+    category: 'Atmospheric / Vapor',
+    tagline: 'Vapor Manipulation & Pressure Dispersion',
+    description:
+      'Generates and controls invisible vapor, toxic haze, and explosive pressurized mist while allowing the user to disperse harmlessly through air.',
+    colorTone: 'Volatile Mist',
+  },
+  {
+    id: 'art',
+    name: 'Art',
+    japanese: '画の力 (Ga no Chikara)',
+    kanji: '画',
+    category: 'Creation / Materialization',
+    tagline: 'Tangible Ink & Illustration Summoning',
+    description:
+      'Draws illustrations that peel directly off parchment, imbuing sketches with physical mass, functional weaponry, and living constructs.',
+    colorTone: 'Living Canvas',
+  },
+];
+
+export interface WorldLore {
+  title: string;
+  subtitle: string;
+  civilizationClash: {
+    title: string;
+    description: string;
+    fruitCivilization: {
+      name: string;
+      japanese: string;
+      concept: string;
+    };
+    swordsmanCivilization: {
+      name: string;
+      japanese: string;
+      concept: string;
+    };
+  };
+  forbiddenFusionRule: {
+    ruleName: string;
+    japanese: string;
+    lorePercent: string;
+    description: string;
+    consequence: string;
+  };
+  classifiedSecret: {
+    badge: string;
+    title: string;
+    japanese: string;
+    description: string;
+  };
+  dragonWhisper: {
+    title: string;
+    japanese: string;
+    hint: string;
+  };
+}
+
+export const WORLD_LORE: WorldLore = {
+  title: 'THE ANCIENT WORLD LORE',
+  subtitle: 'The 60% Chronicle: The Split Civilizations & The Shattered Steel',
+  civilizationClash: {
+    title: 'The Great Riots: Fruit Bearers vs. Swordsmen',
+    description:
+      'Long before the portal opened in modern school halls, ancient history was carved by brutal riots and irreconcilable wars between two dominant civilizations that divided the earth.',
+    fruitCivilization: {
+      name: 'The Fruit-Eater Civilization',
+      japanese: '果実の民 (Kajitsu no Tami)',
+      concept:
+        'Lineages who gained supernatural transformations and elemental mastery by consuming mysterious anomalous fruits born of ancient rifts.',
+    },
+    swordsmanCivilization: {
+      name: 'The Swordsman Civilization',
+      japanese: '剣士の民 (Kenshi no Tami)',
+      concept:
+        'Purists who rejected supernatural consumption, cultivating unbending martial discipline, steel-forging mastery, and lethal blade arts.',
+    },
+  },
+  forbiddenFusionRule: {
+    ruleName: 'The Incompatibility Law (The Shattered Blade)',
+    japanese: '壊刃の掟 (Kaijin no Okite)',
+    lorePercent: '60% Ancient Lore Foundation',
+    description:
+      'The forces of the fruit and the sword refuse to coexist. If any fruit user attempts to master a sword or mix the mystical energy of their fruit with cold steel, the blade violently fractures and shatters into brittle dust. True mastery demands choosing one absolute path.',
+    consequence: 'No fusion is possible: any fruit-infused blade will instantly explode into shards.',
+  },
+  classifiedSecret: {
+    badge: 'CLASSIFIED // GROUP INTEL',
+    title: 'The Secret of the Twin Blades',
+    japanese: '二振りの剣 (Futafuri no Ken)',
+    description:
+      'Unknown to most of the classroom, not everyone who stepped through the portal received fruit powers. Secretly, two members within the group are destined to receive legendary swords—setting them on an inevitable, dangerous collision course with their fruit-wielding peers.',
+  },
+  dragonWhisper: {
+    title: 'Faint Dragon Whisper',
+    japanese: '古龍の気配 (Koryū no Kehai)',
+    hint: '...Deep beneath the tectonic scars where neither fruit nor blade can reach, an ancient colossus breathes. A single slit-pupil eye opens in the subterranean dark...',
+  },
 };
 
 // Generates an authentic black and white student manga SVG placeholder page

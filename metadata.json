@@ -1,6 +1,6 @@
 {
   "name": "Xploration of Powers",
-  "description": "An original student-made manga website and reader for Xploration of Powers (力の探求).",
+  "description": "Original student manga chronicle following high schoolers who step through an enigmatic portal, awakening extraordinary powers of Tiger, Light, Portal, Gas, and Art amid an ancient clash of Fruit-Bearers and Swordsmen.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
