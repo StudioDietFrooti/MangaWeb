@@ -1,6 +1,6 @@
 {
-  "name": "Xploration of Powers",
-  "description": "Original student manga chronicle following high schoolers who step through an enigmatic portal as their awakening re-ignites extraordinary powers of Tiger, Light, Portal, Gas, and Art.",
+  "name": "Xploration of Power",
+  "description": "By StudioDietFrooti. Debut original manga Xploration of Power — follow students awakening extraordinary abilities beyond the school threshold.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
